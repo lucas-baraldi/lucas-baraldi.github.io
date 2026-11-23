@@ -281,6 +281,7 @@ canvas { display: block; }
 .case__facts dt { padding-top: 5px; }
 .case__facts dd { font-size: 18px; color: var(--muted); }
 .case__facts dd.is-main { color: var(--text); }
+.case__note { margin-top: 14px; padding-left: 108px; max-width: calc(60ch + 108px); font-size: 18px; color: var(--muted); }
 .panel {
   position: relative; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden;
   background: var(--surface); box-shadow: inset 0 0 0 1px var(--line);
@@ -296,6 +297,7 @@ canvas { display: block; }
   .case__text, .case__media { grid-column: 1 / -1; padding-right: 0; }
   .case__facts { grid-template-columns: 1fr; row-gap: 4px; }
   .case__facts dt { padding-top: 12px; }
+  .case__note { padding-left: 0; margin-top: 16px; }
 }
 
 /* lab */

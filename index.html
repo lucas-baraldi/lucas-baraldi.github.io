@@ -139,12 +139,13 @@
             <p class="label">At Bolt Energy</p>
             <h3 class="case__title"><span class="mask"><span class="mask__in">HR operations: contractor invoices and Slack</span></span></h3>
             <dl class="case__facts">
-              <dt class="label">Goal</dt><dd class="is-main">Take manual checking out of contractor invoice handling.</dd>
-              <dt class="label">Built</dt><dd>An invoice intake and validation module, a Slack app for the HR team, and a cost/ROI model for the agent in three lines: build tokens, run tokens and infrastructure.</dd>
+              <dt class="label">Goal</dt><dd class="is-main">Give HR one place to receive and track contractor invoices.</dd>
+              <dt class="label">Built</dt><dd>An invoice intake module and a Slack app for the HR team, built so automated document reading can plug in later.</dd>
               <dt class="label">Stack</dt><dd>Kotlin, Spring Boot, PostgreSQL, Slack Bolt SDK, AWS.</dd>
             </dl>
+            <p class="case__note">I also modeled the agent's cost in three lines (build tokens, run tokens, infrastructure) to estimate ROI.</p>
           </div>
-          <div class="case__media"><div class="panel"><canvas data-anim="hr" role="img" aria-label="Animation: a document comes in, its fields are read and checked, and a message goes out."></canvas></div></div>
+          <div class="case__media"><div class="panel"><canvas data-anim="hr" role="img" aria-label="Animation: a document comes in, drops into a queue, and a message bubble notifies the team."></canvas></div></div>
         </article>
 
         <article class="case" data-reveal>
@@ -167,6 +168,7 @@
             <dl class="case__facts">
               <dt class="label">Goal</dt><dd class="is-main">Tell a sales team which companies in their base are worth a call.</dd>
               <dt class="label">Built</dt><dd>Web-research agents that classify a B2B company base by ownership structure and economic group, delivered as a ready-to-use spreadsheet. I delivered the same kind of pipeline for a logistics company.</dd>
+              <dt class="label">Stack</dt><dd>Python, DuckDB, pandas, Claude Code agents.</dd>
             </dl>
           </div>
           <div class="case__media"><div class="panel"><canvas data-anim="leads" role="img" aria-label="Animation: a grid of grey dots is scanned and the dots gather into clusters."></canvas></div></div>
@@ -177,7 +179,9 @@
             <p class="label">At Bolt Energy</p>
             <h3 class="case__title"><span class="mask"><span class="mask__in">Executive AI workspace</span></span></h3>
             <dl class="case__facts">
-              <dt class="label">Built</dt><dd class="is-main">A cloud-hosted Claude Code environment for a company executive, operated from the phone.</dd>
+              <dt class="label">Goal</dt><dd class="is-main">Let an executive run AI agents and automations from the phone.</dd>
+              <dt class="label">Built</dt><dd>A cloud-hosted Claude Code environment for a company executive, operated from the phone.</dd>
+              <dt class="label">Stack</dt><dd>Claude Code, AWS EC2 (Windows Server), PowerShell.</dd>
             </dl>
           </div>
           <div class="case__media"><div class="panel"><canvas data-anim="workspace" role="img" aria-label="Animation: a phone sends a command, a box in the cloud runs it and the result comes back."></canvas></div></div>
@@ -200,7 +204,9 @@
             <p class="label">Personal project</p>
             <h3 class="case__title"><span class="mask"><span class="mask__in">Zero-cost short-video engine</span></span></h3>
             <dl class="case__facts">
-              <dt class="label">Built</dt><dd class="is-main">A pipeline that produces short videos and schedules them on three platforms through scheduled tasks, with no paid tools.</dd>
+              <dt class="label">Goal</dt><dd class="is-main">Publish short videos every day without manual work.</dd>
+              <dt class="label">Built</dt><dd>A pipeline that produces short videos and schedules them on three platforms through scheduled tasks, with no paid tools.</dd>
+              <dt class="label">Stack</dt><dd>Python, FFmpeg, faster-whisper, Windows Task Scheduler.</dd>
             </dl>
           </div>
           <div class="case__media"><div class="panel"><canvas data-anim="video" role="img" aria-label="Animation: a script becomes video frames, which go out to three scheduled outputs."></canvas></div></div>
@@ -211,7 +217,7 @@
         <p class="label">Lab</p>
         <ul>
           <li><a class="link" href="https://github.com/lucas-baraldi/poc-mastra" target="_blank" rel="noopener">Agent observability proof of concept</a><span>Mastra, TypeScript</span></li>
-          <li><a class="link" href="https://github.com/lukiin-z/campus" target="_blank" rel="noopener">Campus, a university events app</a><span>React, TypeScript</span></li>
+          <li><p>Campus, a university events app</p><span>React, TypeScript</span></li>
         </ul>
       </div>
     </div>
