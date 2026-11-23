@@ -1,0 +1,6 @@
+_local/
+assets-in/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
