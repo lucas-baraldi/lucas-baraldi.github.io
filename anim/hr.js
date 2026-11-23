@@ -1,56 +1,50 @@
-// HR operations: a document comes in -> fields are read -> check -> message bubble.
-import { stage, pal, E, P, fade, lerp, bubble, bars, path, seg, box, text, check, pulse } from './kit.js';
+// HR operations: a document comes in -> drops into a queue -> a message bubble tells the team.
+import { stage, pal, E, P, fade, lerp, bubble, bars, path, seg, box, text, pulse } from './kit.js';
 
 export function renderAt(ctx, w, h, t) {
   stage(ctx, w, h, t, tt => {
-    ctx.translate(0, 18);
+    ctx.translate(0, 16);
     // document slides in
     const dk = E(tt, 0.2, 1.0);
-    const dx = lerp(-10, 40, dk);
-    const fields = [0, 1, 2, 3];
+    const dx = lerp(-10, 36, dk);
     fade(ctx, dk, () => {
       ctx.beginPath();
-      ctx.moveTo(dx, 52); ctx.lineTo(dx + 78, 52); ctx.lineTo(dx + 98, 72); ctx.lineTo(dx + 98, 196); ctx.lineTo(dx, 196);
+      ctx.moveTo(dx, 70); ctx.lineTo(dx + 52, 70); ctx.lineTo(dx + 70, 88); ctx.lineTo(dx + 70, 170); ctx.lineTo(dx, 170);
       ctx.closePath();
       ctx.strokeStyle = pal.ink;
       ctx.stroke();
-      path(ctx, [[dx + 78, 52], [dx + 78, 72], [dx + 98, 72]], 1, pal.ink);
-      fields.forEach(i => {
-        const y = 96 + i * 24;
-        const read = tt > 1.6 + i * 0.5;
-        seg(ctx, dx + 14, y, dx + 44, y, 1, pal.muted);
-        seg(ctx, dx + 14, y + 8, dx + 80, y + 8, 1, read ? pal.ink : pal.faint);
+      path(ctx, [[dx + 52, 70], [dx + 52, 88], [dx + 70, 88]], 1, pal.ink);
+      bars(ctx, dx + 12, 108, [30, 46, 46, 38], 14, 1, pal.muted);
+    });
+    text(ctx, 'invoice', 36, 188, { chars: P(tt, 0.8, 1.3) });
+
+    // on its way to the queue
+    path(ctx, [[114, 120], [144, 120]], E(tt, 1.2, 1.7), pal.muted);
+
+    // the queue: two items already waiting, the new one drops into the next free slot
+    fade(ctx, E(tt, 0.5, 1.2), () => {
+      box(ctx, 150, 56, 100, 140, 8, pal.muted);
+      [168, 144].forEach(y => {
+        box(ctx, 160, y, 80, 18, 5, pal.faint);
+        seg(ctx, 170, y + 9, 206, y + 9, 1, pal.faint);
       });
     });
-    text(ctx, 'invoice', 40, 212, { chars: P(tt, 0.8, 1.3) });
-
-    // reading line
-    if (tt > 1.4 && tt < 3.6) {
-      const y = lerp(88, 188, P(tt, 1.4, 3.6));
-      seg(ctx, 34, y, 144, y, 1, pal.ink);
-    }
-
-    // extracted fields
-    fields.forEach(i => {
-      const t0 = 1.7 + i * 0.5;
-      const y = 100 + i * 24;
-      path(ctx, [[146, y], [176, y]], E(tt, t0, t0 + 0.4), pal.faint);
-      fade(ctx, E(tt, t0 + 0.2, t0 + 0.7), () => {
-        box(ctx, 178, y - 9, 74, 18, 5, pal.muted);
-        bars(ctx, 188, y, [34], 0, 1, pal.ink);
-      }, 6);
-      check(ctx, 240, y, 7, E(tt, t0 + 0.6, t0 + 1.0), pal.ink);
+    const qk = E(tt, 1.8, 2.8);
+    fade(ctx, P(tt, 1.8, 2.1), () => {
+      const y = lerp(64, 120, qk);
+      box(ctx, 160, y, 80, 18, 5, pal.ink);
+      seg(ctx, 170, y + 9, 214, y + 9, 1, pal.ink);
     });
-    text(ctx, 'validated', 178, 212, { chars: P(tt, 3.6, 4.1) });
+    text(ctx, 'queue', 150, 212, { chars: P(tt, 2.6, 3.0) });
 
-    // result goes to the team
-    path(ctx, [[254, 136], [282, 136]], E(tt, 4.0, 4.5), pal.muted);
-    const bk = E(tt, 4.4, 5.1);
+    // the team gets a message
+    path(ctx, [[254, 129], [282, 129]], E(tt, 3.2, 3.7), pal.muted);
+    const bk = E(tt, 3.6, 4.3);
     fade(ctx, bk, () => {
-      bubble(ctx, 284, 108, 86, 52, tt > 5.0 ? pal.accent : pal.ink, 'right');
-      bars(ctx, 296, 124, [48, 30], 12, P(tt, 4.8, 5.5), pal.muted);
+      bubble(ctx, 284, 96, 86, 52, tt > 4.4 ? pal.accent : pal.ink, 'right');
+      bars(ctx, 296, 112, [48, 30], 12, P(tt, 4.0, 4.7), pal.muted);
     }, 8);
-    pulse(ctx, 284, 190, tt, 5.2);
-    text(ctx, 'sent to the team', 294, 190, { color: pal.accent, chars: P(tt, 5.3, 6.0) });
+    pulse(ctx, 284, 180, tt, 4.6);
+    text(ctx, 'team notified', 294, 180, { color: pal.accent, chars: P(tt, 4.7, 5.4) });
   });
 }
